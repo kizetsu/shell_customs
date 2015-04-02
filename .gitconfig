@@ -1,0 +1,7 @@
+[user]
+	name = Kizetsu
+	email = kizetsu.rd@googlemail.com
+[core]
+	editor = vim
+[alias]
+	lg = log --format=\"%Cgreen%ad%Creset %C(cyan)%<(20)%an%Creset %C(auto)%h%Creset%C(auto)%d%Creset %s\" --date=short
