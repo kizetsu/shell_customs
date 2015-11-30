@@ -35,6 +35,17 @@ vim(){
   fi
 }
 
+# rSync local
+sync(){
+  command rsync --stats --progress --numeric-ids -axAhHSPc $@
+}
+
+# rSync over SSH
+rsync(){
+  command rsync --stats --progress --numeric-ids -axAhHSPc -e "ssh -F ${HOME}/.ssh/config" $@
+}
+
+
 
 # get computer specific aliases
 # post in this file everything that should not be synchronized
