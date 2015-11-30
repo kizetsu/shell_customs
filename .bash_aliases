@@ -35,6 +35,15 @@ vim(){
   fi
 }
 
+# get specific file list from server
+sshls() {
+  if [ $# -ne 0 ]; then
+    ssh $1 "ls $2"
+  else
+    echo "usage: sshls [SERVER] [PATH]"
+  fi
+}
+
 # rSync local
 sync(){
   command rsync --stats --progress --numeric-ids -axAhHSPc $@
