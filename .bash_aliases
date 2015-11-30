@@ -41,6 +41,8 @@ sync(){
 }
 
 # rSync over SSH
+# hint: you have to add a config file at ~/.shh/config
+# you can find the syntax for the ssh config file in ssh_config.bsp (text file)
 rsync(){
   command rsync --stats --progress --numeric-ids -axAhHSPc -e "ssh -F ${HOME}/.ssh/config" $@
 }
