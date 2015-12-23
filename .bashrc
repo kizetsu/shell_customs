@@ -34,20 +34,23 @@ export LS_COLORS
 
 PS1="\[\033[1;37m\][\[\033[0;32m\]\u\[\033[1;37m\]@\[\033[1;36m\]\h\[\033[1;37m\]]\[\033[0;32m\]\w \[\033[1;37m\]\$ \[\033[1;35m\]\033[s\033[1;\$((COLUMNS-4))f\$(date +%H:%M)\033[u\[\033[0m\]"
 
-function __prompt_command() {
-    USERHOST="\[\033[1;37m\][\[\033[0;32m\]\u\[\033[1;37m\]@\[\033[1;36m\]\h\[\033[1;37m\]]"
-    ACTPATH="\[\033[0;32m\]\w"
-    CLOCK="\[\033[1;35m\]\033[s\033[1;\$((COLUMNS-4))f\$(date +%H:%M)\033[u\[\033[0m\]"
-    if [ $? == 0 ];then
-        PS1="${USERHOST} ${ACTPATH} \[\033[0;31m\]$ ${CLOCK}"
-    else
-        PS1="${USERHOST} ${ACTPATH} \[\033[0;32m\]$ ${CLOCK}"
-    fi
-}
+# deactivated because it f**ked somehow with my terminal on archlinux - worked without problems on ubuntu..
+#function __prompt_command() {
+#    USERHOST="\[\033[1;37m\][\[\033[0;32m\]\u\[\033[1;37m\]@\[\033[1;36m\]\h\[\033[1;37m\]]"
+#    ACTPATH="\[\033[0;32m\]\w"
+#    CLOCK="\[\033[1;35m\]\033[s\033[1;\$((COLUMNS-4))f\$(date +%H:%M)\033[u\[\033[0m\]"
+#    if [ $? == 0 ];then
+#        PS1="${USERHOST} ${ACTPATH} \[\033[0;31m\]$ ${CLOCK}"
+#    else
+#        PS1="${USERHOST} ${ACTPATH} \[\033[0;32m\]$ ${CLOCK}"
+#    fi
+#}
 
 #
 # User specified Functions
 #
+# if you want to activate this: you need the .prompt.py at your home folder
+# you also have to remove the line starting with 'PS1="...'
 #function __prompt_command() {
 #  export ERR=$?
 #  ~/.prompt.py --right
