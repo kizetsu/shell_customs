@@ -1,0 +1,127 @@
+# @name gitrc
+# @package shell_customs
+# @subpackage git
+# @author Ralph Dittrich <kizetsu.rd@googlemail.com>
+# @created 28.01.2016
+#
+
+# git aliases and functions
+alias status='git status'
+alias start='git start'
+alias publish='git publish'
+alias finish='git finish'
+alias init-flow='git init flow'
+
+# functions
+gadd() {
+    if [ $# -ne 0 ]; then
+        command git add $@
+    else
+        command git add --all
+    fi
+}
+
+glone() {
+    if [ $# -ne 0 ]; then
+        command git clone $@
+    else
+        echo "usage: glone [GITPATH (e.g. http://github.com/kizetsu/shell_customs)]"
+    fi
+}
+
+git() {
+    case $1 in
+        cp)
+            COMMIT_MSG="\"${@:2}\""
+            echo "git commit -m ${COMMIT_MSG}"
+            command git commit -m "${COMMIT_MSG}"
+            command git push
+            ;;
+        reroll)
+            command git checkout -b stached
+            command git pull
+            command git add --all
+            command git commit -m "project reroll"
+            command git merge master
+            command git -f push origin master
+            ;;
+        init)
+            case $2 in
+                flow)
+                    command git flow init -d
+                    ;;
+                lab)
+                    command git init
+                    command touch README.md
+                    command git add --all
+                    command git commit -m "initial commit"
+                    command git log
+                    ;;
+                full)
+                    command git init
+                    command touch README.md
+                    command git flow init -d
+                    command git add --all
+                    command git commit -m "initial commit"
+                    command git log
+                    ;;
+                *)
+                    command git init
+                    ;;
+            esac
+            ;;
+        start)
+            command git flow $2 start $3
+            ;;
+        publish)
+            command git flow $2 publish $3
+            ;;
+        finish)
+            command git flow $2 finish $3
+            ;;
+        help)
+           command git-help()
+           ;;
+        *)
+            command git $@
+            ;;
+    esac
+}
+
+git-help() {
+    case $1 in
+        cp)
+            echo "usage: git cp COMMIT_MASSAGE"
+            echo "careful: # causes errors"
+            ;;
+        reroll)
+            echo "usage: git reroll"
+            echo ""
+            echo "be careful. This ccan't be undone!"
+            echo "This command "
+        '')
+            echo "usages for modified git functions:"
+            echo "  git cp                git commit -m MESSAGE; git push"
+            echo "  git reroll            force current status to master branch"
+            echo "  git init lab          git init with readme.md and initial commit"
+            echo "  git init flow         git flow init (with defaults)"
+            echo "  git init full         git init && git flow init with readme.md and initial commit"
+            echo "  git start             git flow \$1 start \$2"
+            echo "  git publish           git flow \$1 publish \$2"
+            echo "  git finish            git flow \$1 finish \$2"
+            echo ""
+            echo "  gadd                  (alias for) git add"
+            echo "  glone                 (alias for) git clone"
+            echo "  status                (alias for) git status"
+            echo "  start                 (alias for) git start"
+            echo "  publish               (alias for) git publish"
+            echo "  finish                (alias for) git finish"
+            echo "  init-flow             (alias for) git init flow"
+            echo ""
+            echo "usages for standard git functions:"
+            command git --help
+            ;;
+        *)
+            command git --help $@
+    esac
+}

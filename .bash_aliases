@@ -1,65 +1,26 @@
+# @name bash_aliases
+# @package shell_customs
+# @author Ralph Dittrich <kizetsu.rd@googlemail.com>
+# @created 28.01.2016
 #
-# User Specificatons
-#
-# exports and other stuff
 
+# color settings
+alias ls='ls --color=auto'
+alias dir='dir --color=auto'
+alias vdir='vdir --color:auto'
+#alias grep='grep --color:auto'
+#alias fgrep='fgrep --color:auto'
+#alias egrep='egrep --color=auto'
 
-#
-# User specified Aliasses
-#
+# ls settings
+alias ll='ls -alFh --color=auto'
+alias la='ls -A'
+alias l='ls -CF'
+
+# cd settings
 alias ..='cd ..'
 alias ...='cd ../..'
 alias cdr='cd /'
-alias cdw='cd /var/www/'
 alias cdh='cd ~'
-alias cddoc='cd ~/Dokumente/'
-alias cddown='cd ~/Downloads/'
-alias mce='mc -e'
-alias mcv='mc -v'
-alias gitadd='git add ./'
-
-
-#
-# User specified Variables
-#
-
-
-#
-# User specified Functions
-#
-vim(){
-  if [ $# -ne 0 ]; then
-    command vim $@
-  else
-    command vim ./
-  fi
-}
-
-# get specific file list from server
-sshls() {
-  if [ $# -ne 0 ]; then
-    ssh $1 "ls $2"
-  else
-    echo "usage: sshls [SERVER] [PATH]"
-  fi
-}
-
-# rSync local
-sync(){
-  command rsync --stats --progress --numeric-ids -axAhHSPc $@
-}
-
-# rSync over SSH
-# hint: you have to add a config file at ~/.shh/config
-# you can find the syntax for the ssh config file in ssh_config.bsp (text file)
-rsync(){
-  command rsync --stats --progress --numeric-ids -axAhHSPc -e "ssh -F ${HOME}/.ssh/config" $@
-}
-
-
-
-# get computer specific aliases
-# post in this file everything that should not be synchronized
-if [ -f ~/.bash_local_aliases ]; then
-    . ~/.bash_local_aliases
-fi
+alias docs='cd ~/Documents'
+alias down='cd ~/Downloads'
