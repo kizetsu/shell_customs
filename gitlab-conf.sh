@@ -67,8 +67,7 @@ main() {
             echo "  remote = branch -r" >> $confFile
             echo "  all = branch -av" >> $confFile
             ;;
-        *)
-            # actually do nothing..
+        help|*)
             echo "usage:"
             echo "  gitlab-conf [default|smart]"
             echo ""

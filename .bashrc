@@ -16,6 +16,7 @@ if [ -f ~/.prompt.py ]; then
 	  export ERR=$?
 	  ~/.prompt.py --right
 	  PS1=$(~/.prompt.py --left)
+	  # thanks to http://github.com/koffeinflummi for the prompt.py
 	}
 else
 	# LS Colors

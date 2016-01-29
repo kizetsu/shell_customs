@@ -5,7 +5,7 @@
 # @created 28.01.2016
 #
 
-# git aliases and functions
+# git aliases
 alias status='git status'
 alias start='git start'
 alias publish='git publish'
@@ -13,6 +13,8 @@ alias finish='git finish'
 alias init-flow='git init flow'
 
 # functions
+
+# git add {file(s)} or everything that has changed
 gadd() {
     if [ $# -ne 0 ]; then
         command git add $@
@@ -21,6 +23,8 @@ gadd() {
     fi
 }
 
+# shortcut for gitclone
+# @TODO: change to cases and integrate server adresses like for github, gitlab and so on
 glone() {
     if [ $# -ne 0 ]; then
         command git clone $@
@@ -29,15 +33,18 @@ glone() {
     fi
 }
 
+# extends git for some functions
 git() {
     case $1 in
         cp)
+            #commit and push
             COMMIT_MSG="\"${@:2}\""
             echo "git commit -m ${COMMIT_MSG}"
             command git commit -m "${COMMIT_MSG}"
             command git push
             ;;
         reroll)
+            # carefull! it's a rebase command that is not fully testet
             command git checkout -b stached
             command git pull
             command git add --all
@@ -46,11 +53,14 @@ git() {
             command git -f push origin master
             ;;
         init)
+            # git init extension
             case $2 in
                 flow)
+                    # simple git flow init
                     command git flow init -d
                     ;;
                 lab)
+                    # init for github / gitlab
                     command git init
                     command touch README.md
                     command git add --all
@@ -58,6 +68,7 @@ git() {
                     command git log
                     ;;
                 full)
+                    # full init with flow
                     command git init
                     command touch README.md
                     command git flow init -d
@@ -65,11 +76,12 @@ git() {
                     command git commit -m "initial commit"
                     command git log
                     ;;
-                *)
+                ''|*)
                     command git init
                     ;;
             esac
             ;;
+        # short git flow commands ->
         start)
             command git flow $2 start $3
             ;;
@@ -79,8 +91,9 @@ git() {
         finish)
             command git flow $2 finish $3
             ;;
+        # <- short git flow commands
         help)
-           command git-help()
+           command git-help ${@:2}
            ;;
         *)
             command git $@
@@ -102,13 +115,13 @@ git-help() {
         '')
             echo "usages for modified git functions:"
             echo "  git cp                git commit -m MESSAGE; git push"
-            echo "  git reroll            force current status to master branch"
+            echo "  git reroll            (BETA) force current status to master branch"
             echo "  git init lab          git init with readme.md and initial commit"
             echo "  git init flow         git flow init (with defaults)"
             echo "  git init full         git init && git flow init with readme.md and initial commit"
-            echo "  git start             git flow \$1 start \$2"
-            echo "  git publish           git flow \$1 publish \$2"
-            echo "  git finish            git flow \$1 finish \$2"
+            echo "  git start             git flow {release|feature|hotfix} start [name]"
+            echo "  git publish           git flow {release|feature|hotfix} publish [name]"
+            echo "  git finish            git flow {release|feature|hotfix} finish [name]"
             echo ""
             echo "  gadd                  (alias for) git add"
             echo "  glone                 (alias for) git clone"
