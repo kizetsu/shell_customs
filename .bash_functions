@@ -46,7 +46,10 @@ rsync() {
 
 # project functions
 project() {
-    PROJECT_DIR="${HOME}/Documents/Projects"
+    # Define the folder where your projects in (withour trailing slash at the end)
+    # e.g. ${HOME}/Documents/Projects
+    # e.g. /var/www/
+    PROJECT_DIR="/var/www"
     case $1 in
         list)
             if [ $# -lt 2 ]; then
@@ -56,12 +59,20 @@ project() {
             fi
             ;;
         go)
-            command cd ${PROJECT_DIR}/$2
+            if [ $# -lt 2 ]; then
+                command cd ${PROJECT_DIR}/$2
+            else
+                command cd ${PROJECT_DIR}/$2/$3
+            fi
             ;;
         new)
-            command mkdir ${PROJECT_DIR}/$2
+            if [ $# -lt 2 ]; then
+                command mkdir ${PROJECT_DIR}/$2
+            else
+                command mkdir ${PROJECT_DIR}/$2/$3
+            fi
             ;;
-        help|'')
+        help|''|*)
             echo "usage: project {new|go|list} [NAME]"
             echo ""
             echo "new NAME          to create a new folder in projects"
