@@ -38,7 +38,7 @@ git() {
     case $1 in
         cp)
             #commit and push
-            COMMIT_MSG="\"${@:2}\""
+            COMMIT_MSG="${@:2}"
             echo "git commit -m ${COMMIT_MSG}"
             command git commit -m "${COMMIT_MSG}"
             command git push
@@ -114,7 +114,7 @@ git-help() {
             echo "This command "
         '')
             echo "usages for modified git functions:"
-            echo "  git cp                git commit -m MESSAGE; git push"
+            echo "  git cp                git commit -m \"MESSAGE\"; git push"
             echo "  git reroll            (BETA) force current status to master branch"
             echo "  git init lab          git init with readme.md and initial commit"
             echo "  git init flow         git flow init (with defaults)"
