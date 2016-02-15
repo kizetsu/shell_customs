@@ -72,12 +72,37 @@ project() {
                 command mkdir ${PROJECT_DIR}/$2/$3
             fi
             ;;
-        help|''|*)
+        # @TODO:
+        #git)
+        #    case $2 in
+        #        check-all|ca)
+        #            # get all project folders in PROJECT_DIR
+        #            # foreach project folder get git status of subfolders
+        #            # => also get names from project folder/subfolder
+        #            # rework everything like in git short-status
+        #            # output
+        #            ;;
+        #        *)
+        #            # atm. do nothing...
+        #            # maybe for future uses like get status of specific project/subfolder
+        #            # maybe you could do something like git add -p on every project or something
+        #            # maybe baby.. but for the moment that's just future visions
+        #            ;;
+        #    esac
+        #    ;;
+        help|'')
             echo "usage: project {new|go|list} [NAME]"
             echo ""
             echo "new NAME          to create a new folder in projects"
             echo "go NAME           go to specific project folder"
             echo "list [NAME]       list all or specific project folders"
+            ;;
+        *)
+            echo "did you mean: project go ${PROJECT_DIR}/${1}/${2} ? [y|n]"
+            read yn
+            if [ "${yn}" == y ]; then
+                command cd ${PROJECT_DIR}/$1/$2
+            fi
             ;;
     esac
 }
