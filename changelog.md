@@ -1,4 +1,4 @@
- ###v0.1.0.1
+ ###v0.1.1
 small modifications in git extension
 - better outup for git short-status
 added "fuckaround" for 'project go' function

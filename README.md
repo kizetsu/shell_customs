@@ -28,4 +28,8 @@ I also chose to do this to get more readability. Everyone should have the possib
 the sample folder holds some sample config files you can use to create your configs<br/>
 <br/>
 <br/>
-<em>In <strong>Windows</strong> you may have to copy the code you want to use to one file. Because some bash emulators can't include more then one bashrc or throwing errors by processing the code.</em>
+<em>In <strong>Windows</strong> you may have to copy the code you want to use to one file. Because some bash emulators can't include more then one bashrc or throwing errors by processing the code.</em><br/>
+<br/>
+<br/>
+**git short-status colors**
+![git short-status colors](http://i.imgur.com/dSmZtsn.png)

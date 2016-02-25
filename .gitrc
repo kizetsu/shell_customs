@@ -113,7 +113,7 @@ git() {
             ;;
         # <- short git flow commands
         help)
-            command git-help ${@:2}
+            githelp ${@:2}
             ;;
         short-status)
             # get list of tracked files
@@ -141,7 +141,7 @@ git() {
     esac
 }
 
-git-help() {
+githelp() {
     case $1 in
         cp)
             echo "usage: git cp COMMIT_MASSAGE"
@@ -152,6 +152,26 @@ git-help() {
             echo ""
             echo "be careful. This ccan't be undone!"
             echo "This command "
+            ;;
+        short-status)
+            echo "showcases:"
+            echo ""
+            echo -e " \033[0;37mUntracked Files"
+            echo ""
+            echo -e "\033[0;37mtracked but not added for commit"
+            echo -e " \033[0;32mAdded Files"
+            echo -e " \033[1;33mModified Files"
+            echo -e " \033[1;31mDeleted Files"
+            echo ""
+            echo -e "\033[0;37madded for commit"
+            echo -e " \033[0;32m+ \033[0;32mAdded Files"
+            echo -e " \033[0;32m+ \033[1;33mModified Files"
+            echo -e " \033[0;32m+ \033[1;31mDeleted Files"
+            echo ""
+            echo -e "\033[0;37mmodified after added for commit (you need to re-add)"
+            echo -e " \033[1;31m! \033[0;32mAdded Files"
+            echo -e " \033[1;31m! \033[1;33mModified Files"
+            ;;
         '')
             echo "usages for modified git functions:"
             echo "  git cp                git commit -m \"MESSAGE\"; git push"
