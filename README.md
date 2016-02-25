@@ -1,5 +1,7 @@
 # shell_customs
 
+###v0.1.0
+
 Because the code had reached a certain size, I had to split it into multiple files.<br/>
 I also chose to do this to get more readability. Everyone should have the possibility to modify the code for his/her needs.<br/>
 <br/>
@@ -23,4 +25,7 @@ I also chose to do this to get more readability. Everyone should have the possib
   - *BETA !*<br/>
 
 <br/>
-  the sample folder holds some sample config files you can use to create your configs<br/>
+the sample folder holds some sample config files you can use to create your configs<br/>
+<br/>
+<br/>
+<em>In <strong>Windows</strong> you may have to copy the code you want to use to one file. Because some bash emulators can't include more then one bashrc or throwing errors by processing the code.</em>
