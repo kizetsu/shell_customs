@@ -17,15 +17,14 @@ I also chose to do this to get more readability. Everyone should have the possib
 
 **.gitrc**<br/>
 - it's some kind of extension for git commands<br/>
-  - *BETA !*<br/>
+  - some functions are currently **BETA !**<br/>
 
 **.gitlab-conf.sh**<br/>
 - this script will give you a gitlab / github standardized gitconfig<br/>
-  - *CAREFUL: other gitconfig files in home folder will be overwritten*<br/>
-  - *BETA !*<br/>
+  - **CAREFUL:** other gitconfig files in home folder will be overwritten<br/>
+  - **BETA !**<br/>
 
-<br/>
 the sample folder holds some sample config files you can use to create your configs<br/>
 <br/>
 <br/>
-<em>In <strong>Windows</strong> you may have to copy the code you want to use to one file. Because some bash emulators can't include more then one bashrc or throwing errors by processing the code.</em><br/>
+*In **Windows** you may have to copy the code you want to use to one file. Because some bash emulators can't include more then one bashrc or throwing errors by processing the code.*

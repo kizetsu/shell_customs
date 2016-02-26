@@ -11,7 +11,7 @@ githelp<br/>
 gadd<br/>
 glone<br/>
 <br/><br/>
-# Aliases
+### Aliases
 status      (alias for) git status<br/>
 gitst		(alias for) git short-status<br/>
 start       (alias for) git start<br/>
@@ -22,7 +22,7 @@ init-flow	(alias for) git init flow<br/>
 <br/>
 ###git cp
 This command combines 'git commit -m' and 'git push'.<br/>
-Syntax: git cp COMMIT_MSG
+Syntax: git cp COMMIT_MSG<br/>
 ![git cp example](http://i.imgur.com/ubtco7Q.png)
 
 ###git reroll
@@ -37,8 +37,9 @@ parameters:
 - flow: initialize a new git repository with git flow
 - lab:  initialize a new git repository, create a README-md and make inital commit
 - full: initialize a new git repository with git flow, README.md and inital commit
+
 You can also use standard git init parameters or use without parameters.<br/>
-Syntax: git init (flow|lab|full)
+Syntax: git init (flow|lab|full)<br/>
 ![git init full](http://imgur.com/c78yHiz.png)
 
 ###git lab
@@ -47,6 +48,7 @@ This command installs a git.conf to your system.
 Parameters:
 - smart: installs a gitconf with some smart configurations
 - show: not implemented yet
+
 Syntax: git lab (smart|show)
 
 ###git start
@@ -63,7 +65,7 @@ Syntax: git finish (feature/hotix/etc.) NAME
 
 ###git short-status
 This command gives you a short, nice, coloured output for 'git status'<br/>
-Syntax: git short-status
+Syntax: git short-status<br/>
 ![git short-status colors](http://i.imgur.com/dSmZtsn.png)
 
 ###glone
@@ -78,5 +80,5 @@ Syntax: gadd [optional: PATH_TO_FILE]
 ###githelp
 It's just a simple help output for the new commands.<br/>
 It overrides 'git help' but not 'git --help'. Also it shows the standard git help after the new one.<br/>
-Syntax: git help
+Syntax: git help<br/>
 ![git help output](http://i.imgur.com/AdEPdq9.png)
