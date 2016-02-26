@@ -90,13 +90,12 @@ git() {
                     # full init with flow
                     command git init
                     command touch README.md
-                    command git flow init -d
                     command git add --all
-                    command git commit -m "initial commit"
+                    command git flow init -d
                     command git log
                     ;;
                 ''|*)
-                    command git init
+                    command git init ${@:2}
                     ;;
             esac
             ;;
@@ -179,12 +178,14 @@ githelp() {
             echo "  git init lab          git init with readme.md and initial commit"
             echo "  git init flow         git flow init (with defaults)"
             echo "  git init full         git init && git flow init with readme.md and initial commit"
+            echo "  git lab               (BETA) creates a git.conf file"
             echo "  git start             git flow {release|feature|hotfix} start [name]"
             echo "  git publish           git flow {release|feature|hotfix} publish [name]"
             echo "  git finish            git flow {release|feature|hotfix} finish [name]"
             echo ""
             echo "  gadd                  (alias for) git add"
             echo "  glone                 (alias for) git clone"
+            echo "  gitst                 (alias for) git short-status"
             echo "  status                (alias for) git status"
             echo "  start                 (alias for) git start"
             echo "  publish               (alias for) git publish"
