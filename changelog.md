@@ -1,8 +1,8 @@
 ###v0.1.1
- @ToDo:
+**@ToDo:**
 - [x] small modifications in git extension -> better outup for git short-status
 - [x] add "fuckaround" for 'project go' function
-- [ ] repair "fuckaround" function..
+- [ ] add autoComplete for 'project go' function
 - [ ] add documentation files
   - [ ] bashrc doc
   - [ ] bash_functions doc
