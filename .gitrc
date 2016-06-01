@@ -31,7 +31,7 @@ gadd() {
             GSTATUS="${GSTATUS// M /\\033[1;31m- \\033[1;33mModified   }"  # Modified Files (modified files not added for commit)
             GSTATUS="${GSTATUS//MM /\\033[1;31m! \\033[1;33mModified    }" # Modified Files (modified after git add)
             GSTATUS="${GSTATUS//M /\\033[0;32m+ \\033[1;33mModified   }"   # Modified Files
-            GSTATUS="${GSTATUS// D /\\033[1;31m- \\033[1;31mDeleted    }"  # Deleted Files (deleted files not added for commit)
+            GSTATUS="${GSTATUS// D /\\033[1;31m- \033[1;31mDeleted    }"  # Deleted Files (deleted files not added for commit)
             GSTATUS="${GSTATUS//D /\\033[0;32m+ \\033[1;31mDeleted    }"   # Deleted Files
             GSTATUS="${GSTATUS//\?\? /\\033[0;37mUntracked   }"           # Untracked Files
         else
@@ -109,6 +109,8 @@ git() {
             ;;
         finish)
             command git flow $2 finish $3
+            command git push develop
+            command git push --tags
             ;;
         # <- short git flow commands
         help)
@@ -119,14 +121,14 @@ git() {
             GSTATUS=$(git status -s)
             if [ "${GSTATUS}" != "" ]; then
                 # change codes to values and get colors
-                GSTATUS="${GSTATUS// A /\\033[0;32mAdded      }"             # Added Files (added files not added for commit)
-                GSTATUS="${GSTATUS//AM /\\033[1;31m! \\033[0;32mAdded       }" # Added Files(modified after git add)
-                GSTATUS="${GSTATUS//A /\\033[0;32m+ \\033[0;32mAdded      }"  # Added Files
-                GSTATUS="${GSTATUS// M /\\033[1;33mModified   }"             # Modified Files (modified files not added for commit)
-                GSTATUS="${GSTATUS//MM /\\033[1;31m! \\033[1;33mModified    }" # Modified Files (modified after git add)
-                GSTATUS="${GSTATUS//M /\\033[0;32m+ \\033[1;33mModified   }"  # Modified Files
-                GSTATUS="${GSTATUS// D /\\033[1;31mDeleted    }"             # Deleted Files (deleted files not added for commit)
-                GSTATUS="${GSTATUS//D /\\033[0;32m+ \\033[1;31mDeleted    }"  # Deleted Files
+                GSTATUS="${GSTATUS// A /\\033[0;32mAdded       }"             # Added Files (added files not added for commit)
+                GSTATUS="${GSTATUS//AM /\\033[1;31m! \\033[0;32mAdded     }" # Added Files(modified after git add)
+                GSTATUS="${GSTATUS//A /\\033[0;32m+ \\033[0;32mAdded     }"  # Added Files
+                GSTATUS="${GSTATUS// M /\\033[1;33mModified    }"             # Modified Files (modified files not added for commit)
+                GSTATUS="${GSTATUS//MM /\\033[1;31m! \\033[1;33mModified  }" # Modified Files (modified after git add)
+                GSTATUS="${GSTATUS//M /\\033[0;32m+ \\033[1;33mModified  }"  # Modified Files
+                GSTATUS="${GSTATUS// D /\\033[1;31mDeleted     }"             # Deleted Files (deleted files not added for commit)
+                GSTATUS="${GSTATUS//D /\\033[0;32m+ \\033[1;31mDeleted   }"  # Deleted Files
                 GSTATUS="${GSTATUS//\?\? /\\033[0;37mUntracked   }"          # Untracked Files
             else
                 GSTATUS="\033[1;33mnothing to show\033[0m"
@@ -149,50 +151,55 @@ githelp() {
         reroll)
             echo "usage: git reroll"
             echo ""
-            echo "be careful. This ccan't be undone!"
+            echo "be careful. This can't be undone!"
             echo "This command "
             ;;
         short-status)
             echo "showcases:"
             echo ""
-            echo -e " \033[0;37mUntracked Files"
+            echo -e "    \033[0;37mUntracked Files"
             echo ""
             echo -e "\033[0;37mtracked but not added for commit"
-            echo -e " \033[0;32mAdded Files"
-            echo -e " \033[1;33mModified Files"
-            echo -e " \033[1;31mDeleted Files"
+            echo -e "    \033[0;32mAdded Files"
+            echo -e "    \033[1;33mModified Files"
+            echo -e "    \033[1;31mDeleted Files"
             echo ""
             echo -e "\033[0;37madded for commit"
-            echo -e " \033[0;32m+ \033[0;32mAdded Files"
-            echo -e " \033[0;32m+ \033[1;33mModified Files"
-            echo -e " \033[0;32m+ \033[1;31mDeleted Files"
+            echo -e "    \033[0;32m+ \033[0;32mAdded Files"
+            echo -e "    \033[0;32m+ \033[1;33mModified Files"
+            echo -e "    \033[0;32m+ \033[1;31mDeleted Files"
             echo ""
             echo -e "\033[0;37mmodified after added for commit (you need to re-add)"
-            echo -e " \033[1;31m! \033[0;32mAdded Files"
-            echo -e " \033[1;31m! \033[1;33mModified Files"
+            echo -e "    \033[1;31m! \033[0;32mAdded Files"
+            echo -e "    \033[1;31m! \033[1;33mModified Files"
             ;;
         '')
-            echo "usages for modified git functions:"
-            echo "  git cp                git commit -m \"MESSAGE\"; git push"
-            echo "  git reroll            (BETA) force current status to master branch"
-            echo "  git init lab          git init with readme.md and initial commit"
-            echo "  git init flow         git flow init (with defaults)"
-            echo "  git init full         git init && git flow init with readme.md and initial commit"
-            echo "  git lab               (BETA) creates a git.conf file"
-            echo "  git start             git flow {release|feature|hotfix} start [name]"
-            echo "  git publish           git flow {release|feature|hotfix} publish [name]"
-            echo "  git finish            git flow {release|feature|hotfix} finish [name]"
+            echo -e "\033[1;33musages for modified git functions:\033[0;37m"
+            echo "functions:"
+            echo "    git cp                git commit -m \"MESSAGE\"; git push"
+            #echo "    git reroll            (BETA) force current status to master branch"
+            echo "    git init lab          git init with readme.md and initial commit"
+            echo "    git init flow         git flow init (with defaults)"
+            echo "    git init full         git init && git flow init with readme.md and initial commit"
+            #echo "    git lab               (BETA) creates a git.conf file"
+            echo "    git start             git flow {release|feature|hotfix} start [name]"
+            echo "    git publish           git flow {release|feature|hotfix} publish [name]"
+            echo "    git finish            git flow {release|feature|hotfix} finish [name]"
             echo ""
-            echo "  gadd                  (alias for) git add"
-            echo "  glone                 (alias for) git clone"
-            echo "  gitst                 (alias for) git short-status"
-            echo "  status                (alias for) git status"
-            echo "  start                 (alias for) git start"
-            echo "  publish               (alias for) git publish"
-            echo "  finish                (alias for) git finish"
-            echo "  init-flow             (alias for) git init flow"
+            echo "aliases:"
+            echo "    gadd                  (alias for) git add"
+            echo "    glone                 (alias for) git clone"
+            echo "    gitst                 (alias for) git short-status"
+            echo "    status                (alias for) git status"
+            echo "    start                 (alias for) git start"
+            echo "    publish               (alias for) git publish"
+            echo "    finish                (alias for) git finish"
+            echo "    init-flow             (alias for) git init flow"
             echo ""
-            echo "usages for standard git functions:"
+            echo -e "\033[1;33mgit configurations:\033[0;37m"
+            test -f ~/.gitconfig && cat ~/.gitconfig
+            echo ""
+            echo -e "\033[1;33musages for standard git functions:\033[0;37m"
             command git --help
             ;;
         *)
