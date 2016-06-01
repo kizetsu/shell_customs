@@ -12,4 +12,19 @@
 [color]
     ui = true
 [alias]
-	lg = log --format=\"%Cgreen%ad%Creset %C(cyan)%<(20)%an%Creset %C(auto)%h%Creset%C(auto)%d%Creset %s\" --date=short
+    list = log --format=\"%Cgreen%ad%Creset %C(cyan)%<(20)%an%Creset %C(auto)%h%Creset%C(auto)%d%Creset %s\" --date=short -20
+    last = log -1
+    short = log --format=\"%Cgreen%ad%Creset %C(cyan)%<(20)%an%Creset %C(auto)%h%Creset%C(auto)%d%Creset %s\" --date=short -5
+    ffs = flow feature start
+    ffc = flow feature checkout
+    ffp = flow feature publish
+    fhs = flow hotfix start
+    fhc = flow hotfix checkout
+    fhp = flow hotfix publish
+    frs = flow release start
+    frc = flow release checkout
+    frp = flow release publish
+    remote = branch -r
+    history = log -n5
+    fetch = fetch --all --prune
+    bav = branch -av
