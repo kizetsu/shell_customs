@@ -51,7 +51,10 @@ def is_ssh():
 def segment_whoami():
     global colors
 
-    user = os.environ["USER"]
+    if  re.search("Windows", os.environ["OS"]):
+        user = os.environ["USERNAME"]
+    else:
+        user = os.environ["USER"]
     host = str(subprocess.check_output("hostname"), "utf-8")[:-1]
 
     cols, lines = get_terminal_size()

@@ -46,7 +46,7 @@ rsync() {
 
 # project functions
 project() {
-    # Define the folder where your projects in (withour trailing slash at the end)
+    # Define the folder where your projects are in (without trailing slash at the end)
     # e.g. ${HOME}/Documents/Projects
     # e.g. /var/www/
     PROJECT_DIR="/var/www"

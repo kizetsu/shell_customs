@@ -2,7 +2,8 @@
 **@ToDo:**
 - [x] small modifications in git extension -> better outup for git short-status
 - [x] add "fuckaround" for 'project go' function
-- [ ] add autoComplete for 'project go' function
+- [o] ~~add autoComplete for 'project go' function~~ (not working on windows)
+- [x] add sudo-like function for windows
 - [ ] add documentation files
   - [ ] bashrc doc
   - [ ] bash_functions doc
