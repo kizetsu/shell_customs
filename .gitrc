@@ -38,7 +38,7 @@ gadd() {
             GSTATUS="\033[1;33mnothing to show\033[0m"
         fi
         # output list of Files
-        echo -e "${GSTATUS}"
+        echo -e "${GSTATUS}\033[0m"
     fi
 }
 
@@ -60,7 +60,8 @@ git() {
             COMMIT_MSG="${@:2}"
             echo "git commit -m ${COMMIT_MSG}"
             command git commit -m "${COMMIT_MSG}"
-            command git push
+            ACTBRANCH=$(git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ (\1)/')
+            command git push $ACTBRANCH
             ;;
         reroll)
             # carefull! it's a rebase command that is not fully testet
@@ -134,7 +135,29 @@ git() {
                 GSTATUS="\033[1;33mnothing to show\033[0m"
             fi
             # output list of Files
-            echo -e "${GSTATUS}"
+            echo -e "${GSTATUS}\033[0m"
+            ;;
+        colordiff)
+            # get shiort-status like coloured git diff (git diff --name-status)
+            case $2 in
+                '')
+                    GDBRANCH=''
+                    ;;
+                *)
+                    GDBRANCH="${2}"
+                    ;;
+            esac
+            GDIFF=$(git diff --name-status ${GDBRANCH})
+            if [ "${GDIFF}" != "" ]; then
+                # change codes to values and get colors
+                GDIFF="${GDIFF//A$'\t'/\\033[0;32m \\033[0;32mAdded     }"  # Added Files
+                GDIFF="${GDIFF//M$'\t'/\\033[0;32m \\033[1;33mModified  }"  # Modified Files
+                GDIFF="${GDIFF//D$'\t'/\\033[0;32m \\033[1;31mDeleted   }"  # Deleted Files
+            else
+                GDIFF="\033[1;33mnothing to show\033[0m"
+            fi
+            # output list of Files
+            echo -e "${GDIFF}\033[0m"
             ;;
         *)
             command git $@

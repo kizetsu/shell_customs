@@ -2,7 +2,7 @@
 **@ToDo:**
 - [x] small modifications in git extension -> better outup for git short-status
 - [x] add "fuckaround" for 'project go' function
-- [o] ~~add autoComplete for 'project go' function~~ (not working on windows)
+- [ ] ~~add autoComplete for 'project go' function~~ (not working on windows)
 - [x] add sudo-like function for windows
 - [ ] add documentation files
   - [ ] bashrc doc
@@ -13,6 +13,7 @@
 - [ ] finish tests linux
 - [ ] finish tests Windows (git bash & CygWin)
 - [ ] finish tests OSX
+added git colordiff function
 
 #v0.1.0
 Reformatted whole code and split to several files
