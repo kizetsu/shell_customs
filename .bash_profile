@@ -10,3 +10,4 @@ test -f ~/.bashrc && . ~/.bashrc
 test -f ~/.bash_aliases && . ~/.bash_aliases
 test -f ~/.bash_functions && . ~/.bash_functions
 test -f ~/.gitrc && . ~/.gitrc
+test -f ~/.shellmage && . ~/.shellmage
