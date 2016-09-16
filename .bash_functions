@@ -55,21 +55,21 @@ project() {
             if [ $# -lt 2 ]; then
                 command ls -alFh --color=auto ${PROJECT_DIR}
             else
-                command ls -alFh --color=auto ${PROJECT_DIR}/$2/$3
+                command ls -alFh --color=auto ${PROJECT_DIR}/${2,,}/$3
             fi
             ;;
         go)
             if [ $# -lt 2 ]; then
-                command cd ${PROJECT_DIR}/$2
+                command cd ${PROJECT_DIR}/${2,,}
             else
-                command cd ${PROJECT_DIR}/$2/$3
+                command cd ${PROJECT_DIR}/${2,,}/$3
             fi
             ;;
         new)
             if [ $# -lt 2 ]; then
-                command mkdir ${PROJECT_DIR}/$2
+                command mkdir ${PROJECT_DIR}/${2,,}
             else
-                command mkdir ${PROJECT_DIR}/$2/$3
+                command mkdir ${PROJECT_DIR}/${2,,}/$3
             fi
             ;;
         # @TODO:
