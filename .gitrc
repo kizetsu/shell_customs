@@ -8,6 +8,7 @@
 # git aliases
 alias status='git status'
 alias gitst='git short-status'
+alias gitco='git secure-checkout'
 alias start='git start'
 alias publish='git publish'
 alias finish='git finish'
@@ -55,12 +56,6 @@ glone() {
 # extends git for some functions
 git() {
     case $1 in
-        secure-checkout)
-            MSG=$(git checkout ${@:2})
-            MSG="${MSG//behind/\\033[1;31mbehind \\033[0m}"
-            MSG="${MSG//ahead/\\033[1;33mahead \\033[0m}"
-            echo -e "${MSG}\033[0m"
-            ;;
         cp)
             #commit and push
             COMMIT_MSG="${@:2}"
@@ -134,8 +129,14 @@ git() {
             # output list of Files
             echo -e "${GSTATUS}\033[0m"
             ;;
+        secure-checkout)
+            MSG=$(git checkout ${@:2})
+            MSG="${MSG//behind/\\033[1;31mbehind \\033[0m}"
+            MSG="${MSG//ahead/\\033[1;33mahead \\033[0m}"
+            echo -e "${MSG}\033[0m"
+            ;;
         colordiff)
-            # get shiort-status like coloured git diff (git diff --name-status)
+            # get short-status like coloured git diff (git diff --name-status)
             case $2 in
                 '')
                     GDBRANCH=''

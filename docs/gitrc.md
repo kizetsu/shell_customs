@@ -1,12 +1,12 @@
 #Functions
 git cp<br/>
-git reroll *beta*<br/>
 git init<br/>
-git lab *beta*<br/>
 git start<br/>
 git publish<br/>
 git finish<br/>
 git short-status<br/>
+git secure-checkout<br/>
+git colordiff<br/>
 githelp<br/>
 gadd<br/>
 glone<br/>
@@ -14,6 +14,7 @@ glone<br/>
 ### Aliases
 status      (alias for) git status<br/>
 gitst		(alias for) git short-status<br/>
+gitco		(alias for) git secure-checkout<br/>
 start       (alias for) git start<br/>
 publish     (alias for) git publish<br/>
 finish      (alias for) git finish<br/>
@@ -24,12 +25,6 @@ init-flow	(alias for) git init flow<br/>
 This command combines 'git commit -m' and 'git push'.<br/>
 Syntax: git cp COMMIT_MSG<br/>
 ![git cp example](http://i.imgur.com/ubtco7Q.png)
-
-###git reroll
-Careful: Beta-Status because it's not fully testet yet. Do **not** use<br/>
-This command triggers some git functions to get your actual working status on top of the master.<br/>
-Ihe thought is to reroll your working process to a specified point. You will have to checkout the commit you want to get on top. Then, if you want or need to, make some modifications and use the reroll command.<br/>
-Syntax: git reroll<br/>
 
 ###git init
 This command extends the standard 'git init' command.<br/>
@@ -42,31 +37,32 @@ You can also use standard git init parameters or use without parameters.<br/>
 Syntax: git init (flow|lab|full)<br/>
 ![git init full](http://imgur.com/c78yHiz.png)
 
-###git lab
-Careful: Beta-Status because it's not fully testet yet. Can cause problems.<br/>
-This command installs a git.conf to your system.
-Parameters:
-- smart: installs a gitconf with some smart configurations
-- show: not implemented yet
-
-Syntax: git lab (smart|show)
-
 ###git start
-This is a smarter command for 'git flow (feature/hotix/etc.) start NAME'.<br/>
-Syntax: git start (feature/hotix/etc.) NAME
+This is a smarter command for 'git flow (feature/hotix/etc.) start {BRANCHNAME}'.<br/>
+Syntax: git start (feature/hotix/etc.) {BRANCHNAME}
 
 ###git publish
-This is a smarter command for 'git flow (feature/hotix/etc.) publish NAME'.<br/>
-Syntax: git publish (feature/hotix/etc.) NAME
+This is a smarter command for 'git flow (feature/hotix/etc.) publish {BRANCHNAME}'.<br/>
+Syntax: git publish (feature/hotix/etc.) {BRANCHNAME}
 
 ###git finish
-This is a smarter command for 'git flow (feature/hotix/etc.) finish NAME'.<br/>
-Syntax: git finish (feature/hotix/etc.) NAME
+This is a smarter command for 'git flow (feature/hotix/etc.) finish {BRANCHNAME}'.<br/>
+Syntax: git finish (feature/hotix/etc.) {BRANCHNAME}
 
 ###git short-status
 This command gives you a short, nice, coloured output for 'git status'<br/>
 Syntax: git short-status<br/>
 ![git short-status colors](http://i.imgur.com/dSmZtsn.png)
+
+###git secure-checkout
+This command gives you a higlight if the checked out branch is ahead or behind<br/>
+Syntax: git secure-checkout {BRANCHNAME}<br/>
+![git secure-checkout](---)
+
+###git colordiff
+This command gives you a coloured 'diff --name-status' output
+Syntax: git colordiff {BRANCHNAME}<br/>
+![git colordiff](---)
 
 ###glone
 It's more an alias then a command. It just shorten the command for 'git clone'.<br/>
