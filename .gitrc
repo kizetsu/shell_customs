@@ -168,12 +168,8 @@ githelp() {
             echo "usage: git cp COMMIT_MASSAGE"
             echo "careful: # causes errors"
             ;;
-        reroll)
-            echo "usage: git reroll"
-            echo ""
-            echo "be careful. This can't be undone!"
-            echo "This command "
-            ;;
+        secure-checkout)
+            echo "usage: git secure-checkout {branch}"
         short-status)
             echo "showcases:"
             echo ""
@@ -197,7 +193,6 @@ githelp() {
             echo -e "\033[1;33musages for modified git functions:\033[0;37m"
             echo "functions:"
             echo "    git cp                git commit -m \"MESSAGE\"; git push"
-            #echo "    git reroll            (BETA) force current status to master branch"
             echo "    git init lab          git init with readme.md and initial commit"
             echo "    git init flow         git flow init (with defaults)"
             echo "    git init full         git init && git flow init with readme.md and initial commit"
@@ -205,6 +200,7 @@ githelp() {
             echo "    git start             git flow {release|feature|hotfix} start [name]"
             echo "    git publish           git flow {release|feature|hotfix} publish [name]"
             echo "    git finish            git flow {release|feature|hotfix} finish [name]"
+            echo "    git secure-checkout   git secure-checkout {branch}"
             echo ""
             echo "aliases:"
             echo "    gadd                  (alias for) git add"
