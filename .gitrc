@@ -69,15 +69,6 @@ git() {
             ACTBRANCH=$(git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ (\1)/')
             command git push $ACTBRANCH
             ;;
-        reroll)
-            # carefull! it's a rebase command that is not fully testet
-            command git checkout -b stached
-            command git pull
-            command git add --all
-            command git commit -m "project reroll"
-            command git merge master
-            command git -f push origin master
-            ;;
         init)
             # git init extension
             case $2 in
