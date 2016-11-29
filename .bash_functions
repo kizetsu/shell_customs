@@ -51,28 +51,16 @@ project() {
     # e.g. /var/www/
     PROJECT_DIR="/var/www"
     case $1 in
-        list)
-            if [ $# -lt 2 ]; then
-                command ls -alFh --color=auto ${PROJECT_DIR}
-            else
-                command ls -alFh --color=auto ${PROJECT_DIR}/${2,,}/$3
-            fi
+        list|--list)
+            command ls -alFh --color=auto ${PROJECT_DIR}/$2/$3
             ;;
-        go)
-            if [ $# -lt 2 ]; then
-                command cd ${PROJECT_DIR}/${2,,}
-            else
-                command cd ${PROJECT_DIR}/${2,,}/$3
-            fi
+        go|--go)
+            command cd ${PROJECT_DIR}/$2/$3
             ;;
-        new)
-            if [ $# -lt 2 ]; then
-                command mkdir ${PROJECT_DIR}/${2,,}
-            else
-                command mkdir ${PROJECT_DIR}/${2,,}/$3
-            fi
+        new|--new)
+            command mkdir ${PROJECT_DIR}/$2/$3
             ;;
-        help|'')
+        help|--help|'')
             echo "usage: project {new|go|list} [NAME]"
             echo ""
             echo "new NAME          to create a new folder in projects"
@@ -80,10 +68,10 @@ project() {
             echo "list [NAME]       list all or specific project folders"
             ;;
         *)
-            echo "did you mean: project go ${PROJECT_DIR}/${1}/${2} ? [y|n]"
+            echo "did you mean: project go ${PROJECT_DIR}/${2}/${3} ? [y|n]"
             read yn
             if [ "${yn}" == y ]; then
-                command cd ${PROJECT_DIR}/$1/$2
+                command cd ${PROJECT_DIR}/$2/$3
             fi
             ;;
     esac
