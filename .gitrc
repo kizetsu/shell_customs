@@ -6,21 +6,30 @@
 #
 
 # git aliases
-alias status='git status'
-alias gitst='git short-status'
-alias gitco='git secure-checkout'
-alias start='git start'
-alias publish='git publish'
-alias finish='git finish'
-alias init-flow='git init flow'
+alias gtt='gittool'
+alias status='gtt status'
+alias gitst='gtt short-status'
+alias start='gtt start'
+alias publish='gtt publish'
+alias finish='gtt finish'
+alias init-flow='gtt init flow'
 
 # functions
 
 # git add {file(s)} or everything that has changed
 gadd() {
     if [ $# -ne 0 ]; then
-        command git add $@
+        case $1 in
+            --help|-h)
+                echo "usage: gadd [filename]"
+                ;;
+            *)
+                # add file
+                command git add $@
+                ;;
+        esac
     else
+        # add all files
         command git add --all
         # get list of tracked files
         GSTATUS=$(git status -s)
@@ -43,6 +52,7 @@ gadd() {
     fi
 }
 
+
 # shortcut for gitclone
 # @TODO: change to cases and integrate server adresses like for github, gitlab and so on
 glone() {
@@ -53,20 +63,45 @@ glone() {
     fi
 }
 
+
 # extends git for some functions
-git() {
+# everything that is unknown to gittool will be handed over to git
+gittool() {
     case $1 in
         cp)
-            #commit and push
-            COMMIT_MSG="${@:2}"
-            echo "git commit -m ${COMMIT_MSG}"
-            command git commit -m "${COMMIT_MSG}"
-            ACTBRANCH=$(git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ (\1)/')
-            command git push $ACTBRANCH
+            case $2 in
+                --help|-h)
+                    echo "usage: gittool cp COMMIT_MASSAGE"
+                    echo "careful: # causes errors. You have to quote this."
+                    ;;
+                *)
+                    #commit and push
+                    COMMIT_MSG="${@:2}"
+                    echo "git commit -m ${COMMIT_MSG}"
+                    command git commit -m "${COMMIT_MSG}"
+                    command git push
+                    ;;
+            esac
+            ;;
+        commit-m)
+            case $2 in
+                --help|-h)
+                    echo "usage: gittool commit-m COMMIT_MASSAGE"
+                    ;;
+                *)
+                    #commit and push
+                    COMMIT_MSG="${@:2}"
+                    echo "git commit -m ${COMMIT_MSG}"
+                    command git commit -m "${COMMIT_MSG}"
+                    ;;
+            esac
             ;;
         init)
             # git init extension
             case $2 in
+                --help|-h)
+                    echo "usage: gittool init {flow|lab|full}"
+                    ;;
                 flow)
                     # simple git flow init
                     command git flow init -d
@@ -92,23 +127,39 @@ git() {
                     ;;
             esac
             ;;
-        # short git flow commands ->
+        # START: short git flow commands ->
         start)
-            command git flow $2 start $3
-            command git push --set-upstream origin $2/$3
+            case $2 in
+                --help|-h)
+                    echo "usage: gittool start {release|feature|hotfix} NAME"
+                    ;;
+                *)
+                    command git flow $2 start $3
+                    command git push --set-upstream origin $2/$3
+                    ;;
+            esac
             ;;
         publish)
-            command git flow $2 publish $3
+            case $2 in
+                --help|-h)
+                    echo "usage: gittool publish {release|feature|hotfix} NAME"
+                    ;;
+                *)
+                    command git flow $2 publish $3
+                    ;;
+            esac
             ;;
         finish)
-            command git flow $2 finish $3
-            command git push develop
-            command git push --tags
+            case $2 in
+                --help|-h)
+                    echo "usage: gittool finish {release|feature|hotfix} NAME"
+                    ;;
+                *)
+                    command git flow $2 finish $3
+                    ;;
+            esac
             ;;
-        # <- short git flow commands
-        help)
-            githelp ${@:2}
-            ;;
+        # <- END: short git flow commands
         short-status)
             # get list of tracked files
             GSTATUS=$(git status -s)
@@ -157,21 +208,20 @@ git() {
             # output list of Files
             echo -e "${GDIFF}\033[0m"
             ;;
+        help)
+            githelp ${@:2}
+            ;;
         *)
             command git $@
             ;;
     esac
 }
 
+
 githelp() {
     case $1 in
-        cp)
-            echo "usage: git cp COMMIT_MASSAGE"
-            echo "careful: # causes errors"
-            ;;
-        secure-checkout)
-            echo "usage: git secure-checkout {branch}"
         short-status)
+            echo "usage: gittool short-status"
             echo "showcases:"
             echo ""
             echo -e "    \033[0;37mUntracked Files"
@@ -190,28 +240,38 @@ githelp() {
             echo -e "    \033[1;31m! \033[0;32mAdded Files"
             echo -e "    \033[1;31m! \033[1;33mModified Files"
             ;;
+        init)
+            echo "usage: gittool init [option]"
+            echo ""
+            echo "options:"
+            echo "    flow                  git flow init (with defaults)"
+            echo "    lab                   git init with readme.md and initial commit"
+            echo "    full                  git init && git flow init with readme.md and initial commit"
+            echo ""
+            echo "hint:"
+            echo "    if no option is given, git will only execute a standard git init."
+            ;;
         '')
             echo -e "\033[1;33musages for modified git functions:\033[0;37m"
             echo "functions:"
-            echo "    git cp                git commit -m \"MESSAGE\"; git push"
-            echo "    git init lab          git init with readme.md and initial commit"
-            echo "    git init flow         git flow init (with defaults)"
-            echo "    git init full         git init && git flow init with readme.md and initial commit"
-            #echo "    git lab               (BETA) creates a git.conf file"
-            echo "    git start             git flow {release|feature|hotfix} start [name]"
-            echo "    git publish           git flow {release|feature|hotfix} publish [name]"
-            echo "    git finish            git flow {release|feature|hotfix} finish [name]"
-            echo "    git secure-checkout   git secure-checkout {branch}"
+            echo "    cp                    git commit -m \"MESSAGE\" && git push"
+            echo "    commit-m              git commit -m \"MESSAGE\""
+            echo "    init                  git init with nice options. See: gittool help init"
+            echo "    start                 git flow {release|feature|hotfix} start [name]"
+            echo "    publish               git flow {release|feature|hotfix} publish [name]"
+            echo "    finish                git flow {release|feature|hotfix} finish [name]"
+            echo "    short-status          coloured version of: git status -s"
+            echo -e "    secure-checkout       git checkout with coloured hint \\033[1;31mbehind \\033[0m and \\033[1;33mahead \\033[0m"
+            echo "    colordiff             coloured version of: git diff --name-status"
             echo ""
             echo "aliases:"
-            echo "    gadd                  (alias for) git add"
-            echo "    glone                 (alias for) git clone"
-            echo "    gitst                 (alias for) git short-status"
-            echo "    status                (alias for) git status"
-            echo "    start                 (alias for) git start"
-            echo "    publish               (alias for) git publish"
-            echo "    finish                (alias for) git finish"
-            echo "    init-flow             (alias for) git init flow"
+            echo "    gtt                   (alias for) gittool"
+            echo "    gitst                 (alias for) gittool short-status"
+            echo "    status                (alias for) gittool status"
+            echo "    start                 (alias for) gittool start"
+            echo "    publish               (alias for) gittool publish"
+            echo "    finish                (alias for) gittool finish"
+            echo "    init-flow             (alias for) gittool init flow"
             echo ""
             echo -e "\033[1;33mgit configurations:\033[0;37m"
             test -f ~/.gitconfig && cat ~/.gitconfig
