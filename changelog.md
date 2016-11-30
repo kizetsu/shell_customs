@@ -1,17 +1,27 @@
 **@ToDo:**
 - [ ] add windows-compatible python prompt
 - [ ] add "fuckaround" for 'project go' function
-- [ ] ~~add autoComplete for 'project go' function~~ (not working on windows)
+- [X] ~~add autoComplete for 'project go' function~~ (not working on windows)
 - [ ] fix performance leak at prompt (windows only)
 - [ ] add documentation files
   - [ ] bashrc doc
   - [ ] bash_functions doc
   - [ ] bash_aliases doc
-  - [ ] gitrc doc (add new contents)
+  - [X] gitrc doc (add new contents)
+  - [ ] gitrc doc (add new images)
   - [ ] git-conf doc
+  - [ ] tool-installer (windows only)
 - [ ] finish tests linux
-- [ ] finish tests Windows (git bash & CygWin)
+- [X] finish tests Windows (git bash & ~~CygWin~~ MSYS2)
 - [ ] finish tests OSX
+- [ ] update README.md
+
+#v0.2.0 (in work)
+added tool-installer to get linux header and standard tools for shell use
+fully reworked .gitrc file (include renaming git to gittool for more compatibility)
+updated gitrc documentation
+updated project command
+
 
 #v0.1.1
 small modifications in git extension -> better outup for git short-status

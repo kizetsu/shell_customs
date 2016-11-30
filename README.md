@@ -1,5 +1,9 @@
 # shell_customs
 
+###v0.2.0
+
+ ...coming soon
+
 ###v0.1.0
 
 Because the code had reached a certain size, I had to split it into multiple files.<br/>
