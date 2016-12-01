@@ -6,6 +6,9 @@
 #
 
 # git aliases
+alias uncommit='git reset --soft HEAD~1'
+
+# gtt aliases
 alias gtt='gittool'
 alias status='gtt status'
 alias gitst='gtt short-status'
@@ -272,6 +275,7 @@ githelp() {
             echo "    publish               (alias for) gittool publish"
             echo "    finish                (alias for) gittool finish"
             echo "    init-flow             (alias for) gittool init flow"
+            echo "    uncommit              (alias for) git reset --soft HEAD~1"
             echo ""
             echo -e "\033[1;33mgit configurations:\033[0;37m"
             test -f ~/.gitconfig && cat ~/.gitconfig
