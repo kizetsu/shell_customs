@@ -222,6 +222,9 @@ gittool() {
             # output list of Files
             echo -e "${GDIFF}\033[0m"
             ;;
+        tree)
+            command git log --graph --oneline --all
+            ;;
         help)
             githelp ${@:2}
             ;;
@@ -278,6 +281,7 @@ githelp() {
             echo -e "    secure-checkout       git checkout with coloured hint \\033[1;31mbehind \\033[0m and \\033[1;33mahead \\033[0m"
             echo "    colordiff             coloured version of: git diff --name-status"
             echo "    fbc                   fetch && branch -av, with coloured output (old: fetch-branch-colored)"
+            echo "    tree                  show git commit tree"
             echo ""
             echo "aliases:"
             echo "    gtt                   (alias for) gittool"
