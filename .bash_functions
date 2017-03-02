@@ -44,38 +44,38 @@ rsync() {
 
 
 
-# project functions
-project() {
-    # Define the folder where your projects are in (without trailing slash at the end)
-    # e.g. ${HOME}/Documents/Projects
-    # e.g. /var/www/
-    PROJECT_DIR="/var/www"
-    case $1 in
-        list|--list)
-            command ls -alFh --color=auto ${PROJECT_DIR}/$2/$3
-            ;;
-        go|--go)
-            command cd ${PROJECT_DIR}/$2/$3
-            ;;
-        new|--new)
-            command mkdir ${PROJECT_DIR}/$2/$3
-            ;;
-        help|--help|'')
-            echo "usage: project {new|go|list} [NAME]"
-            echo ""
-            echo "new NAME          to create a new folder in projects"
-            echo "go NAME           go to specific project folder"
-            echo "list [NAME]       list all or specific project folders"
-            ;;
-        *)
-            echo "did you mean: project go ${PROJECT_DIR}/${2}/${3} ? [y|n]"
-            read yn
-            if [ "${yn}" == y ]; then
-                command cd ${PROJECT_DIR}/$2/$3
-            fi
-            ;;
-    esac
-}
+## project functions
+#project() {
+#    # Define the folder where your projects are in (without trailing slash at the end)
+#    # e.g. ${HOME}/Documents/Projects
+#    # e.g. /var/www/
+#    PROJECT_DIR="/var/www"
+#    case $1 in
+#        list|--list)
+#            command ls -alFh --color=auto ${PROJECT_DIR}/$2/$3
+#            ;;
+#        go|--go)
+#            command cd ${PROJECT_DIR}/$2/$3
+#            ;;
+#        new|--new)
+#            command mkdir ${PROJECT_DIR}/$2/$3
+#            ;;
+#        help|--help|'')
+#            echo "usage: project {new|go|list} [NAME]"
+#            echo ""
+#            echo "new NAME          to create a new folder in projects"
+#            echo "go NAME           go to specific project folder"
+#            echo "list [NAME]       list all or specific project folders"
+#            ;;
+#        *)
+#            echo "did you mean: project go ${PROJECT_DIR}/${2}/${3} ? [y|n]"
+#            read yn
+#            if [ "${yn}" == y ]; then
+#                command cd ${PROJECT_DIR}/$2/$3
+#            fi
+#            ;;
+#    esac
+#}
 
 clipdiff() {
     if [ $# -eq 0 ]; then
